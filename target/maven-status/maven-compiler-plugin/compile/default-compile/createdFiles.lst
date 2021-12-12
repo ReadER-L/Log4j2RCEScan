@@ -1,4 +1,0 @@
-utils/MyHttpClient.class
-dnslog/IDnslog.class
-dnslog/impl/DnslogCN.class
-burp/BurpExtender.class
