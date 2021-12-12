@@ -62,7 +62,6 @@ public class BurpExtender implements IBurpExtender,IScannerCheck{
         String json_body = null;
         for (IParameter parameter:requestInfo.getParameters()){
             try {
-                String payload = null;
                 IDnslog iDnslog = new DnslogCN();
                 newDomain = iDnslog.getNewDomain().replace("\r","").replace("\n","");
                 Integer i = random.nextInt(100);
@@ -76,6 +75,7 @@ public class BurpExtender implements IBurpExtender,IScannerCheck{
                     case IParameter.PARAM_BODY:
                     case IParameter.PARAM_COOKIE:
                         IParameter newParam = this.helpers.buildParameter(parameter.getName(), exp, parameter.getType());
+                        this.stdout.println(newParam.getValue());
                         tmpRequest = this.helpers.updateParameter(rawRequest, newParam);
                         hasModify = true;
                         break;
@@ -105,7 +105,10 @@ public class BurpExtender implements IBurpExtender,IScannerCheck{
                     }
                     boolean hasIssue = iDnslog.getState(newDomain);
                     if (hasIssue) {
+                        this.stdout.println("===================================================");
                         this.stdout.println("[*]Log4j version 2.0 < 2.14.1 RCE High-risk vulnerabilities EXIST!!!");
+                        this.stdout.println(requestInfo.getUrl().toString()+"--->"+"Vulnerable param is :"+parameter.getName());
+                        this.stdout.println("===================================================");
                     }
                 }
 
