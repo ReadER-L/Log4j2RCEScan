@@ -73,7 +73,6 @@ public class BurpExtender implements IBurpExtender,IScannerCheck{
                     tmpReq.getResponse();
                     boolean hasIssue = iDnslog.getState(newDomain);
                     if (hasIssue) {
-
                         this.stdout.println("[*]Log4j version 2.0 < 2.14.1 RCE High-risk vulnerabilities EXIST!!!");
                     }
                 }
